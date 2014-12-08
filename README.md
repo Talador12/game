@@ -26,6 +26,7 @@ https://github.com/Talador12/game
 	C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC
 6. First you will have to right – click on the project1 and select properties or press Alt + Enter. If you choose the second option you have to click on the Solution Explorer at the right of the screen first. Then, after opening the properties of the project, select: Configuration Properties -> Linker -> Input Inside of input you will have to click on Additional Dependencies and scroll down to edit. There you will have to put something which is really important. Type in: allegro-5.0.10-monolith-mt-debug for debug then change the top dropdown from debug to release. Then do the same thing but instead use allegro-5.0.10-monolith-mt
 7. Try to run. If you see msvcr100d.dll in an error, it's a mess involving C++ redistribute. I solved my issue by using the MT link instead of the MD link, but that should be set on 6 and I changed the project from MD to MT so that's on the repo.  This was a pain in the ass, but the code is so easy now.
+8. Now onto Box 2D (TODO)
 
 
 **Allegro 5.0**
@@ -78,6 +79,8 @@ Basic Project on repo!
 
 Allegro made me sad for a bit.
 EDIT: over an hour
+EDIT EDIT: Many hours
+EDIT EDIT EDIT: IT WORKS. IT'S SO PRETTY NOW.
 
 
 Misc
