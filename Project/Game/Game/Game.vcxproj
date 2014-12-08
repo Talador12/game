@@ -70,6 +70,12 @@
   <ItemGroup>
     <ClCompile Include="Source.cpp" />
   </ItemGroup>
+  <ItemGroup>
+    <Media Include="Audio\george.wav" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="Source.h" />
+  </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
   </ImportGroup>

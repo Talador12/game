@@ -77,6 +77,7 @@ Setup the repo with environment steps.
 Basic Project on repo!
 
 Allegro made me sad for a bit.
+EDIT: over an hour
 
 
 Misc
