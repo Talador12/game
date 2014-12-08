@@ -6,26 +6,35 @@ Yay! This is our game!
 *Environment Setup*
 ---
 
-Allegro 5.0
+**Allegro 5.0**
 
 http://alleg.sourceforge.net/download.html
+https://wiki.allegro.cc/index.php?title=Getting_Started (tutorials)
 
-Express 2013 for Windows Desktop
+**Express 2013 for Windows Desktop**
 
 http://www.visualstudio.com/en-US/products/visual-studio-express-vs
 
-Box2D 2.3
+**Box2D 2.3**
 
-http://box2d.org/about/
+https://code.google.com/p/box2d/
 
-Source Tree
+http://box2d.org/about/ (for reference)
+
+Box2D usage PDF tutorial on repo under Environment Setup
+
+**Source Tree**
 
 http://www.sourcetreeapp.com/
+
+**Installation Steps**
+
+I included some of the installer files on our repo, just to ensure we all start with the same environment, under "Environment Setup"
 
 *Meeting Notes*
 ---
 
-*11/30/2014*
+**11/30/2014**
 
 Action RPG
 Top down view (pokemon, zelda link to the past)
@@ -39,6 +48,13 @@ We've discussed this being kind of a lost civilization that's the past, and the 
 
 We need to actually draft out a whole story sometime, since we want an immersive feel with the story, and between areas of the game (transition music challenge?)
 
-12/7/2014
+**12/7/2014**
 
 Game Time!
+
+
+Misc
+---
+**Michael's Music**
+
+https://soundcloud.com/mmc-composition
