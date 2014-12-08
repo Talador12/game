@@ -78,8 +78,11 @@ Setup the repo with environment steps.
 Basic Project on repo!
 
 Allegro made me sad for a bit.
+
 EDIT: over an hour
+
 EDIT EDIT: Many hours
+
 EDIT EDIT EDIT: IT WORKS. IT'S SO PRETTY NOW.
 
 
