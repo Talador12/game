@@ -10,6 +10,17 @@ https://github.com/Talador12/game
 *Environment Setup*
 ---
 
+**Installation Steps**
+
+1. I included some of the installer files on our repo, just to ensure we all start with the same environment, under "Environment Setup"
+
+2. With visual studio installed, simply open the Visual Studio Solution file on the repo to start the project located at:
+
+	Game\Project\Game\Game.sln
+
+3. Then we setup the libraries! Allegro 5.0 first.
+
+
 **Allegro 5.0**
 
 http://alleg.sourceforge.net/download.html
@@ -33,16 +44,6 @@ Box2D usage PDF tutorial on repo under Environment Setup
 **Source Tree**
 
 http://www.sourcetreeapp.com/
-
-**Installation Steps**
-
-1. I included some of the installer files on our repo, just to ensure we all start with the same environment, under "Environment Setup"
-
-2. With visual studio installed, simply open the Visual Studio Solution file on the repo to start the project located at:
-
-	Game\Project\Game\Game.sln
-
-3. Then we setup the libraries! Allegro 5.0 first.
 
 *Meeting Notes*
 ---
