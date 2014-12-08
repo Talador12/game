@@ -3,17 +3,24 @@
 
 Yay! This is our game!
 
+**Recursive Link:**
+
+https://github.com/Talador12/game
+
 *Environment Setup*
 ---
 
 **Allegro 5.0**
 
 http://alleg.sourceforge.net/download.html
+
 https://wiki.allegro.cc/index.php?title=Getting_Started (tutorials)
 
 **Express 2013 for Windows Desktop**
 
 http://www.visualstudio.com/en-US/products/visual-studio-express-vs
+
+I recommend changing your theme to dark (not that this matters): http://msdn.microsoft.com/en-us/library/hh923906.aspx
 
 **Box2D 2.3**
 
@@ -29,7 +36,13 @@ http://www.sourcetreeapp.com/
 
 **Installation Steps**
 
-I included some of the installer files on our repo, just to ensure we all start with the same environment, under "Environment Setup"
+1. I included some of the installer files on our repo, just to ensure we all start with the same environment, under "Environment Setup"
+
+2. With visual studio installed, simply open the Visual Studio Solution file on the repo to start the project located at:
+
+	Game\Project\Game\Game.sln
+
+3. Then we setup the libraries! Allegro 5.0 first.
 
 *Meeting Notes*
 ---
