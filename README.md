@@ -85,6 +85,13 @@ EDIT EDIT: Many hours
 
 EDIT EDIT EDIT: IT WORKS. IT'S SO PRETTY NOW.
 
+**1/10/2015**
+
+Updated the repo for project excludes, should be cleaner now (thanks Devon)
+
+Moving the story to the wiki page, for better collaborating:
+
+https://github.com/Talador12/game/wiki
 
 Misc
 ---
@@ -92,4 +99,4 @@ Misc
 
 https://soundcloud.com/mmc-composition
 
-Test - Devon
+test -Devon
