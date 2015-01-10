@@ -10,8 +10,8 @@ using namespace std;
 
 //Global Variables
 const float FPS = 60;
-const int SCREEN_W = 640;
-const int SCREEN_H = 480;
+const int SCREEN_W = 1920;
+const int SCREEN_H = 1080;
 const int BOUNCER_SIZE = 32;
 float bouncer_x = SCREEN_W / 2.0 - BOUNCER_SIZE / 2.0;
 float bouncer_y = SCREEN_H / 2.0 - BOUNCER_SIZE / 2.0;
@@ -191,22 +191,22 @@ void  movement(ALLEGRO_EVENT ev)
 	{
 		if (key[KEY_UP] && bouncer_y >= 4.0)
 		{
-			bouncer_y -= 4.0;
+			bouncer_y -= 8.0;
 		}
 
 		if (key[KEY_DOWN] && bouncer_y <= SCREEN_H - BOUNCER_SIZE - 4.0)
 		{
-			bouncer_y += 4.0;
+			bouncer_y += 8.0;
 		}
 
 		if (key[KEY_LEFT] && bouncer_x >= 4.0)
 		{
-			bouncer_x -= 4.0;
+			bouncer_x -= 8.0;
 		}
 
 		if (key[KEY_RIGHT] && bouncer_x <= SCREEN_W - BOUNCER_SIZE - 4.0)
 		{
-			bouncer_x += 4.0;
+			bouncer_x += 8.0;
 		}
 
 		redraw = true;
@@ -264,8 +264,15 @@ void  movement(ALLEGRO_EVENT ev)
 		ev.type == ALLEGRO_EVENT_MOUSE_ENTER_DISPLAY)
 	{
 
-		bouncer_x = ev.mouse.x - 15;
-		bouncer_y = ev.mouse.y - 15;
+		int display_width  = al_get_display_width(display);
+		int display_height = al_get_display_height(display);
+
+		bouncer_x = (ev.mouse.x < 15) ? 0 : ev.mouse.x - 15;
+		bouncer_x = ((ev.mouse.x + 15) > display_width) ? (display_width - 30) : bouncer_x;
+
+		bouncer_y = (ev.mouse.y < 15) ? 0 : ev.mouse.y - 15;
+		bouncer_y = ((ev.mouse.y + 15) > display_height) ? (display_height - 30) : bouncer_y;
+
 	}
 	else if (ev.type == ALLEGRO_EVENT_MOUSE_BUTTON_UP)
 	{
