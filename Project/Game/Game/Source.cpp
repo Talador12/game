@@ -167,7 +167,8 @@ void  game()
 	hero = new Unit();
 	hero->loc.X = SCREEN_W / 2.0 - BOUNCER_SIZE / 2.0;
 	hero->loc.Y = SCREEN_H / 2.0 - BOUNCER_SIZE / 2.0;
-
+	hero->dest.X = SCREEN_W / 2.0 - BOUNCER_SIZE / 2.0;
+	hero->dest.Y = SCREEN_H / 2.0 - BOUNCER_SIZE / 2.0;
 	//Game Loop
 	while (!doExit)
 	{
@@ -196,26 +197,28 @@ void  game()
 //Keyboard and Mouse controls
 void  movement(ALLEGRO_EVENT ev)
 {
+	int display_width = al_get_display_width(display);
+	int display_height = al_get_display_height(display);
 	if (ev.type == ALLEGRO_EVENT_TIMER)
 	{
 		if (key[KEY_UP] && hero->loc.Y >= 4.0)
 		{
-			hero->loc.Y -= 8.0;
+			hero->loc.Y -= hero->movement;
 		}
 
 		if (key[KEY_DOWN] && hero->loc.Y <= SCREEN_H - BOUNCER_SIZE - 4.0)
 		{
-			hero->loc.Y += 8.0;
+			hero->loc.Y += hero->movement;
 		}
 
 		if (key[KEY_LEFT] && hero->loc.X >= 4.0)
 		{
-			hero->loc.X -= 8.0;
+			hero->loc.X -= hero->movement;
 		}
 
 		if (key[KEY_RIGHT] && hero->loc.X <= SCREEN_W - BOUNCER_SIZE - 4.0)
 		{
-			hero->loc.X += 8.0;
+			hero->loc.X += hero->movement;
 		}
 
 		redraw = true;
@@ -273,8 +276,7 @@ void  movement(ALLEGRO_EVENT ev)
 			break;
 		}
 	}
-	else if (ev.type == ALLEGRO_EVENT_MOUSE_AXES ||
-		ev.type == ALLEGRO_EVENT_MOUSE_ENTER_DISPLAY)
+	else if (ev.type == ALLEGRO_EVENT_MOUSE_AXES || ev.type == ALLEGRO_EVENT_MOUSE_ENTER_DISPLAY)
 	{
 		//ON MOUSE MOVEMENT
 		int display_width = al_get_display_width(display);
@@ -287,12 +289,15 @@ void  movement(ALLEGRO_EVENT ev)
 	else if (ev.type == ALLEGRO_EVENT_MOUSE_BUTTON_DOWN)
 	{
 		clickHold = true;
-		int display_width = al_get_display_width(display);
-		int display_height = al_get_display_height(display);
 
 		//Hero Movement Update
-		hero->move(ev, display_width, display_height);
+		hero->dest.X = (ev.mouse.x < 15) ? 0 : ev.mouse.x - 15;
+		hero->dest.X = ((ev.mouse.x + 15) > display_width) ? (display_width - 30) : hero->dest.X;
+		hero->dest.Y = (ev.mouse.y < 15) ? 0 : ev.mouse.y - 15;
+		hero->dest.Y = ((ev.mouse.y + 15) > display_height) ? (display_height - 30) : hero->dest.Y;
+		hero->moving = true;
 	}
+	hero->move(display_width, display_height);
 }
 #pragma endregion Game Functions
 #pragma endregion Game Loop

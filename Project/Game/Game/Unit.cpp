@@ -1,12 +1,13 @@
 #include <string>
 #include <allegro5/allegro.h>
+#include <iostream>
 using namespace std;
 
 class Unit{
 public:
 	//Public Variables
 	string name, desc;
-	int HP, movement, atk, def, mgAtk, mgDef = 1;
+	float HP, movement, atk, def, mgAtk, mgDef = 1;
 	bool moving;
 
 	struct location{
@@ -24,61 +25,55 @@ public:
 		name = "Unit Name";
 		desc = "Unit Desc";
 		HP = 10;
-		movement = 1;
+		movement = 10;
 		atk = 1;
 		def = 1;
 		mgAtk = 1;
 		mgDef = 1;
 		moving = false;
+		cout << "harhar";
 	}
 
 	//Arrival check
 	bool arrived()
 	{
-		if (loc.X == dest.X && loc.Y == dest.Y)
+		if ((abs(dest.X) - abs(loc.X)) < 1 && (abs(dest.Y) - abs(loc.Y)) < 1)
 		{
+			loc.X = dest.X;
+			loc.Y = dest.Y;
 			moving = false;
 			return true;
 		}
 		return false;
 	}
-	void move(ALLEGRO_EVENT ev, int display_width, int display_height)
+	void move(int display_width, int display_height)
 	{
-		moving = true;
-		dest.X = (ev.mouse.x < 15) ? 0 : ev.mouse.x - 15;
-		dest.X = ((ev.mouse.x + 15) > display_width) ? (display_width - 30) : dest.X;
-		dest.Y = (ev.mouse.y < 15) ? 0 : ev.mouse.y - 15;
-		dest.Y = ((ev.mouse.y + 15) > display_height) ? (display_height - 30) : dest.Y;
-		loc.X = dest.X;
-		loc.Y = dest.Y;
-		/*
-		moving = true;
-		dest.X = (ev.mouse.x < 15) ? 0 : ev.mouse.x - 15;
-		dest.X = ((ev.mouse.x + 15) > display_width) ? (display_width - 30) : dest.X;
-		dest.Y = (ev.mouse.y < 15) ? 0 : ev.mouse.y - 15;
-		dest.Y = ((ev.mouse.y + 15) > display_height) ? (display_height - 30) : dest.Y;
-		loc.X = dest.X;
-		loc.Y = dest.Y;
+		//This part is breaking "Click to move"
 		int distanceX = (sgn(dest.X - loc.X) * (abs(dest.X) - abs(loc.X)));
 		int distanceY = (sgn(dest.Y - loc.Y) * (abs(dest.Y) - abs(loc.Y)));
+		
 		if (distanceX != 0)
 		{
-		//loc.X += (1 * movement) / distanceX;
+			loc.X += (sgn(dest.X - loc.X)*5 + distanceX) / (1000 * movement);
 		}
 		else
 		{
-		//loc.X = dest.X;
+			loc.X = dest.X;
 		}
 		if (distanceY != 0)
 		{
-		//loc.Y += (1 * movement) / distanceY;
+			loc.Y += (sgn(dest.Y - loc.Y)*5 + distanceY) / (1000 * movement);
 		}
 		else
 		{
-		//loc.Y = dest.Y;
+			loc.Y = dest.Y;
 		}
-		loc.X = dest.X;
-		loc.Y = dest.Y;*/
+
+		//If arrived at destination
+		if (arrived())
+		{
+
+		}
 	}
 private:
 	//Private information functions
