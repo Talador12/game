@@ -17,6 +17,7 @@ const int BOUNCER_SIZE = 32;
 bool key[4] = { false, false, false, false };
 bool redraw = true;
 bool doExit = false;
+bool clickHold = false;
 ALLEGRO_DISPLAY *display = NULL;
 ALLEGRO_EVENT_QUEUE *event_queue = NULL;
 ALLEGRO_TIMER *timer = NULL;
@@ -281,17 +282,16 @@ void  movement(ALLEGRO_EVENT ev)
 	}
 	else if (ev.type == ALLEGRO_EVENT_MOUSE_BUTTON_UP)
 	{
+		clickHold = false;
+	}
+	else if (ev.type == ALLEGRO_EVENT_MOUSE_BUTTON_DOWN)
+	{
+		clickHold = true;
 		int display_width = al_get_display_width(display);
 		int display_height = al_get_display_height(display);
 
 		//Hero Movement Update
-		hero->moving = true;
-		hero->dest.X = (ev.mouse.x < 15) ? 0 : ev.mouse.x - 15;
-		hero->dest.X = ((ev.mouse.x + 15) > display_width) ? (display_width - 30) : hero->dest.X;
-		hero->dest.Y = (ev.mouse.y < 15) ? 0 : ev.mouse.y - 15;
-		hero->dest.Y = ((ev.mouse.y + 15) > display_height) ? (display_height - 30) : hero->dest.Y;
-		hero->loc.X = hero->dest.X;
-		hero->loc.Y = hero->dest.Y;
+		hero->move(ev, display_width, display_height);
 	}
 }
 #pragma endregion Game Functions
