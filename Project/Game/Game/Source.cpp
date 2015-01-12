@@ -1,4 +1,5 @@
 #include "Source.h"
+#include "Unit.cpp"
 
 //Game Coding Project ©2014
 //Keith Adler
@@ -13,8 +14,6 @@ const float FPS = 60;
 const int SCREEN_W = 1920;
 const int SCREEN_H = 1080;
 const int BOUNCER_SIZE = 32;
-float bouncer_x = SCREEN_W / 2.0 - BOUNCER_SIZE / 2.0;
-float bouncer_y = SCREEN_H / 2.0 - BOUNCER_SIZE / 2.0;
 bool key[4] = { false, false, false, false };
 bool redraw = true;
 bool doExit = false;
@@ -23,6 +22,9 @@ ALLEGRO_EVENT_QUEUE *event_queue = NULL;
 ALLEGRO_TIMER *timer = NULL;
 ALLEGRO_BITMAP *bouncer = NULL;
 ALLEGRO_SAMPLE *sample = NULL;
+
+//Game Variables
+Unit* hero;
 
 //Enums
 enum MYKEYS {
@@ -160,6 +162,12 @@ void  allegroDestroy()
 #pragma region Game
 void  game()
 {
+	//Hero Setup
+	hero = new Unit();
+	hero->loc.X = SCREEN_W / 2.0 - BOUNCER_SIZE / 2.0;
+	hero->loc.Y = SCREEN_H / 2.0 - BOUNCER_SIZE / 2.0;
+
+	//Game Loop
 	while (!doExit)
 	{
 		//Allegro Event Handling
@@ -176,7 +184,7 @@ void  game()
 
 			al_clear_to_color(al_map_rgb(0, 0, 0));
 
-			al_draw_bitmap(bouncer, bouncer_x, bouncer_y, 0);
+			al_draw_bitmap(bouncer, hero->loc.X, hero->loc.Y, 0);
 
 			al_flip_display();
 		}
@@ -189,24 +197,24 @@ void  movement(ALLEGRO_EVENT ev)
 {
 	if (ev.type == ALLEGRO_EVENT_TIMER)
 	{
-		if (key[KEY_UP] && bouncer_y >= 4.0)
+		if (key[KEY_UP] && hero->loc.Y >= 4.0)
 		{
-			bouncer_y -= 8.0;
+			hero->loc.Y -= 8.0;
 		}
 
-		if (key[KEY_DOWN] && bouncer_y <= SCREEN_H - BOUNCER_SIZE - 4.0)
+		if (key[KEY_DOWN] && hero->loc.Y <= SCREEN_H - BOUNCER_SIZE - 4.0)
 		{
-			bouncer_y += 8.0;
+			hero->loc.Y += 8.0;
 		}
 
-		if (key[KEY_LEFT] && bouncer_x >= 4.0)
+		if (key[KEY_LEFT] && hero->loc.X >= 4.0)
 		{
-			bouncer_x -= 8.0;
+			hero->loc.X -= 8.0;
 		}
 
-		if (key[KEY_RIGHT] && bouncer_x <= SCREEN_W - BOUNCER_SIZE - 4.0)
+		if (key[KEY_RIGHT] && hero->loc.X <= SCREEN_W - BOUNCER_SIZE - 4.0)
 		{
-			bouncer_x += 8.0;
+			hero->loc.X += 8.0;
 		}
 
 		redraw = true;
@@ -234,6 +242,9 @@ void  movement(ALLEGRO_EVENT ev)
 		case ALLEGRO_KEY_RIGHT:
 			key[KEY_RIGHT] = true;
 			break;
+		case ALLEGRO_KEY_ESCAPE:
+			doExit = true;
+			break;
 		}
 	}
 	else if (ev.type == ALLEGRO_EVENT_KEY_UP)
@@ -257,26 +268,30 @@ void  movement(ALLEGRO_EVENT ev)
 			break;
 
 		case ALLEGRO_KEY_ESCAPE:
+			doExit = true;
 			break;
 		}
 	}
 	else if (ev.type == ALLEGRO_EVENT_MOUSE_AXES ||
 		ev.type == ALLEGRO_EVENT_MOUSE_ENTER_DISPLAY)
 	{
-
-		int display_width  = al_get_display_width(display);
+		//ON MOUSE MOVEMENT
+		int display_width = al_get_display_width(display);
 		int display_height = al_get_display_height(display);
-
-		bouncer_x = (ev.mouse.x < 15) ? 0 : ev.mouse.x - 15;
-		bouncer_x = ((ev.mouse.x + 15) > display_width) ? (display_width - 30) : bouncer_x;
-
-		bouncer_y = (ev.mouse.y < 15) ? 0 : ev.mouse.y - 15;
-		bouncer_y = ((ev.mouse.y + 15) > display_height) ? (display_height - 30) : bouncer_y;
-
 	}
 	else if (ev.type == ALLEGRO_EVENT_MOUSE_BUTTON_UP)
 	{
-		doExit = true;
+		int display_width = al_get_display_width(display);
+		int display_height = al_get_display_height(display);
+
+		//Hero Movement Update
+		hero->moving = true;
+		hero->dest.X = (ev.mouse.x < 15) ? 0 : ev.mouse.x - 15;
+		hero->dest.X = ((ev.mouse.x + 15) > display_width) ? (display_width - 30) : hero->dest.X;
+		hero->dest.Y = (ev.mouse.y < 15) ? 0 : ev.mouse.y - 15;
+		hero->dest.Y = ((ev.mouse.y + 15) > display_height) ? (display_height - 30) : hero->dest.Y;
+		hero->loc.X = hero->dest.X;
+		hero->loc.Y = hero->dest.Y;
 	}
 }
 #pragma endregion Game Functions
